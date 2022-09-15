@@ -267,8 +267,9 @@ def create_feature_vector(results: Results, compound: str, radical: str):
         features[carbon_idx] = feature_vector
 
     # clean up directory
-    remove_file(f"compound.xyz")
-    remove_file(f"radical.xyz")
+    remove_file("compound_features.xyz")
+    remove_file("compound.xyz")
+    remove_file("radical.xyz")
     remove_file("charges")
     remove_file("xtbtopo.mol")
     remove_file("xtbrestart")
