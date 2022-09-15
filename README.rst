@@ -1,1 +1,0 @@
-# Minisci reaction regioselectivity predictor
