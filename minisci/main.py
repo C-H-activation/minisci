@@ -56,11 +56,11 @@ def main(
         # no protomer case
         ##################
 
-        # set aromatic carbon atoms
+        # set aromatic carbon atoms in results object
         results.aromatic_carbons = extract_aromatic_carbons(compound)
 
         # create feature vectors
-        create_feature_vector(results, compound, radical, 0)
+        create_feature_vector(results, compound, radical)
 
         # create machine learning
         results.barriers = create_machine_learning_barriers(

@@ -22,9 +22,7 @@ from helper.rdkit import (
 from helper.results import Results
 
 
-def create_feature_vector(
-    results: Results, compound: str, radical: str, external_charge: int
-):
+def create_feature_vector(results: Results, compound: str, radical: str):
     """Create physicochemical feature vector for compound, radical, and barrier."""
     # print information and dump compound
     print("Featurization applied for")
@@ -52,8 +50,6 @@ def create_feature_vector(
     minus_count = compound_smiles.count("-")
     if plus_count > 0:
         molecular_charge = plus_count - minus_count
-
-    molecular_charge += external_charge
 
     # compound
     xmol_file_from_smiles(compound_smiles, "compound")
