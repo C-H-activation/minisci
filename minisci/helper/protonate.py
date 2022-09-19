@@ -41,13 +41,13 @@ def get_dimorphite_protomers(
     plus_count = input_smiles.count("+")
 
     protomers = dimorphite_dl.protonate(input_smiles)
-    print(protomers)
 
     protonation_sites = [
         protomer
         for protomer in protomers
-        if protomer.count("+") <= (plus_count + number_protons)
+        if protomer.count("+") == (plus_count + number_protons)
     ]
+
     protonation_sites = [
         protomer for protomer in protonation_sites if is_smiles_aromatic(protomer)
     ]

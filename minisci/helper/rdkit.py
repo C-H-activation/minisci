@@ -4,7 +4,6 @@ import os
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem import Draw
 from rdkit.Chem import Descriptors
 from rdkit.Chem.Draw import rdMolDraw2D
 
