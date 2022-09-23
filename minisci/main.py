@@ -7,6 +7,7 @@ from minisci.helper.protonate import get_dimorphite_protomers
 from minisci.helper.rdkit import (
     create_image_from_smiles_barriers,
     extract_aromatic_carbons,
+    standardize,
 )
 from minisci.helper.results import Results
 from minisci.helper.scikit import (
@@ -53,8 +54,12 @@ def main(
         # no protomer case
         ##################
 
+        # standardize SMILES
+        compound = standardize(compound)
+
         # prepare the results object
         results = prepare_results_object_for_compound(results, compound, radical)
+        print("Compound, radical:", compound, radical)
 
         # create SVG for compound
         create_image_from_smiles_barriers(
@@ -68,11 +73,18 @@ def main(
             # extract protomer compound
             protomer_compound = protomer.smiles
 
+            # standardize protomer compound
+            protomer_compound = standardize(protomer_compound)
+
             # initialize results object
             results = initialise_results_object()
+
+            print("Compound, radical:", protomer_compound, radical)
+            # prepare results object
             results = prepare_results_object_for_compound(
                 results, protomer_compound, radical
             )
+
             # create SVG for protomer
             create_image_from_smiles_barriers(
                 protomer_compound,

@@ -5,6 +5,7 @@ import os
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors
+from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.Draw import rdMolDraw2D
 
 from helper.kallisto import kallisto_molecule_from_rdkit_molecule
@@ -177,3 +178,18 @@ def create_image_from_smiles_barriers(
     path = os.path.join(wdir, name)
     with open(path, "w") as svg:
         svg.write(d2d.GetDrawingText())
+
+
+def standardize(smiles: str) -> str:
+    # follows the steps in
+    # https://github.com/greglandrum/RSC_OpenScience_Standardization_202104/blob/main/MolStandardize%20pieces.ipynb
+    # as described **excellently** (by Greg) in
+    # https://www.youtube.com/watch?v=eWTApNX8dJQ
+    mol = Chem.MolFromSmiles(smiles)
+
+    # removeHs, disconnect metal atoms, normalize the molecule, reionize the molecule
+    clean_mol = rdMolStandardize.Cleanup(mol)
+
+    # standardized SMILES and Kekulize-d
+    smiles = Chem.MolToSmiles(clean_mol, kekuleSmiles=True)
+    return smiles
